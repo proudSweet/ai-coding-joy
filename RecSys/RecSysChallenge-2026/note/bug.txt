@@ -1,0 +1,20 @@
+Traceback (most recent call last):                                                                
+  File "/content/ai-coding-joy/RecSys/RecSysChallenge-2026/music-crs-baselines/run_inference_blindset.py", line 151, in <module>
+    main(args)
+  File "/content/ai-coding-joy/RecSys/RecSysChallenge-2026/music-crs-baselines/run_inference_blindset.py", line 109, in main
+    results = music_crs.batch_chat(batch)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/ai-coding-joy/RecSys/RecSysChallenge-2026/music-crs-baselines/mcrs/crs_baseline.py", line 174, in batch_chat
+    responses = self.lm.batch_response_generation(sys_prompts, session_memories, recommend_items)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/ai-coding-joy/RecSys/RecSysChallenge-2026/music-crs-baselines/mcrs/lm_modules/lm.py", line 51, in batch_response_generation
+    self._format_chat_history(sys_prompt, chat_history, recommend_item)
+  File "/content/ai-coding-joy/RecSys/RecSysChallenge-2026/music-crs-baselines/mcrs/lm_modules/lm.py", line 24, in _format_chat_history
+    chat_template = self.tokenizer.apply_chat_template(chat_data, tokenize=False, add_generation_prompt=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/tokenization_utils_base.py", line 1646, in apply_chat_template
+    chat_template = self.get_chat_template(chat_template, tools)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/tokenization_utils_base.py", line 1824, in get_chat_template
+    raise ValueError(
+ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating
