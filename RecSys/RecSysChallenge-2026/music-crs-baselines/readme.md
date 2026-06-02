@@ -4,44 +4,45 @@ Official evaluation framework for the **The RecSys Challenge 2026 Conversational
 
 This repository provides standardized tools to evaluate music recommendation systems on the **TalkPlay Data Challenge** datasets. Participants must follow the strict inference JSON format specified below to ensure their submissions can be properly evaluated.
 
-- **ACM RecSys Website**: [https://www.recsyschallenge.com/](https://www.recsyschallenge.com/)
-- **Challenge Website**: [https://nlp4musa.github.io/music-crs-challenge/](https://nlp4musa.github.io/music-crs-challenge/)
+- **ACM RecSys Website**: <https://www.recsyschallenge.com/>
+- **Challenge Website**: <https://nlp4musa.github.io/music-crs-challenge/>
 - **Challenge datasets**: [talkpl-ai/talkplay-data-challenge](https://huggingface.co/collections/talkpl-ai/talkplay-data-challenge)
 
 ## Timeline
 
-| Date | Milestone |
-|------|-----------|
-| 31 March 2026 | Website online |
-| 10 April 2026 | Start RecSys Challenge — Release dataset (Train, Development, Blind A) |
-| 15 April 2026 | Submission System Open — Leaderboard live (with Blind A dataset) |
-| 15 June 2026 | Blind Dataset B released, Activate submission system for Blind B dataset |
-| 30 June 2026 | End RecSys Challenge |
-| 6 July 2026 | Final Leaderboard & Winners — EasyChair open for submissions |
-| 9 July 2026 | Upload code of the final predictions |
-| 20 July 2026 | Paper Submission Due |
-| 3 August 2026 | Paper Acceptance Notifications |
-| 10 August 2026 | Camera-Ready Papers |
-| September 2026 | RecSys Challenge Workshop at ACM RecSys 2026 |
+| Date           | Milestone                                                                |
+| -------------- | ------------------------------------------------------------------------ |
+| 31 March 2026  | Website online                                                           |
+| 10 April 2026  | Start RecSys Challenge — Release dataset (Train, Development, Blind A)   |
+| 15 April 2026  | Submission System Open — Leaderboard live (with Blind A dataset)         |
+| 15 June 2026   | Blind Dataset B released, Activate submission system for Blind B dataset |
+| 30 June 2026   | End RecSys Challenge                                                     |
+| 6 July 2026    | Final Leaderboard & Winners — EasyChair open for submissions             |
+| 9 July 2026    | Upload code of the final predictions                                     |
+| 20 July 2026   | Paper Submission Due                                                     |
+| 3 August 2026  | Paper Acceptance Notifications                                           |
+| 10 August 2026 | Camera-Ready Papers                                                      |
+| September 2026 | RecSys Challenge Workshop at ACM RecSys 2026                             |
 
----
+***
 
 ## Baseline System
 
 The system operates on a **two-stage pipeline**:
+
 1. **RecSys** — Retrieve candidate tracks matching user preferences
 2. **LLM** — Generate a natural language response explaining the recommendations
 
 ### Core Components
 
-| Component | Description | Module |
-|---|---|---|
-| LLM | Generates natural language responses (Llama-3.2-1B-Instruct) | `mcrs/lm_modules/` |
-| RecSys | Retrieves relevant tracks via BM25 (sparse) or BERT (dense) | `mcrs/retrieval_modules/` |
-| User DB | Stores user profiles (user_id, age, gender, country) | `mcrs/db_user/user_profile.py` |
-| Item DB | Contains track metadata (name, artist, album, tags, release date) | `mcrs/db_item/music_catalog.py` |
+| Component | Description                                                       | Module                          |
+| --------- | ----------------------------------------------------------------- | ------------------------------- |
+| LLM       | Generates natural language responses (Llama-3.2-1B-Instruct)      | `mcrs/lm_modules/`              |
+| RecSys    | Retrieves relevant tracks via BM25 (sparse) or BERT (dense)       | `mcrs/retrieval_modules/`       |
+| User DB   | Stores user profiles (user\_id, age, gender, country)             | `mcrs/db_user/user_profile.py`  |
+| Item DB   | Contains track metadata (name, artist, album, tags, release date) | `mcrs/db_item/music_catalog.py` |
 
----
+***
 
 ## Challenge Resources
 
@@ -52,7 +53,7 @@ The system operates on a **two-stage pipeline**:
 - **Blind A Dataset**: [TalkPlayData-Challenge-Blind-A](https://huggingface.co/datasets/talkpl-ai/TalkPlayData-Challenge-Blind-A)
 - **Blind B Dataset**: Will be uploaded @ 15 Jun
 
----
+***
 
 ## Quick Start
 
@@ -67,7 +68,7 @@ uv pip install flash-attn --no-build-isolation # for fast llm inference
 
 ### Run Inference on the Development Set
 
-**⚠️ Note: During inference, the recommender system must always retrieve candidates from the entire track catalog. Do not filter, subset, or restrict tracks using `track_split_types` or any other mechanism!**
+**⚠️ Note: During inference, the recommender system must always retrieve candidates from the entire track catalog. Do not filter, subset, or restrict tracks using** **`track_split_types`** **or any other mechanism!**
 
 For BM25/BERT baselines, your config must include:
 
@@ -80,7 +81,6 @@ If you do not use `all_tracks`, your evaluation may be considered invalid.
 
 - Always use `all_tracks` for every experiment and submission.
 - Do **not** preprocess, filter, or use only a subset of tracks during inference.
-
 
 ```bash
 # BM25 baseline
@@ -102,7 +102,7 @@ python run_inference_blindset.py --tid llama1b_bm25_blindset_A --batch_size 16
 python run_inference_blindset.py --tid llama1b_bert_blindset_A --batch_size 16
 ```
 
----
+***
 
 ## Custom Configuration
 
@@ -135,13 +135,13 @@ Then run with your config:
 python run_inference_devset.py --tid my_model
 ```
 
----
+***
 
 ## Evaluation
 
-For evaluation, please refer to: https://github.com/nlp4musa/music-crs-evaluator
+For evaluation, please refer to: <https://github.com/nlp4musa/music-crs-evaluator>
 
----
+***
 
 ## Tips & Extensions
 
@@ -151,6 +151,6 @@ See `./tips/` for advanced techniques. Some directions to explore:
 - **Add a Reranker Module** — Implement two-stage ranking with LLM or embedding-based rerankers
 - **Generative Retrieval** — Use semantic IDs for end-to-end track generation
 
----
+***
 
 Good luck with the challenge!
